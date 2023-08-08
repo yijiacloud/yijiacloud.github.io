@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>白噪音</title>
+   <link rel="stylesheet" href="q.css">
+  <meta name="viewport" content="width=320, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <style>
+	  #st{
+		  border-top-right-radius: 5px;
+	  }
+	  .expand-button:focus {
+	    outline: none !important;
+	    -webkit-tap-highlight-color: transparent;
+	  }
+    body {
+      font-weight: 100;
+      margin: 0;
+      padding: 0;
+      background-image: url('https://mp-a68a848e-4cc9-48ac-94e0-2dcbfb062ad0.cdn.bspapp.com/cloudstorage/屏幕截图_2023-08-02_115344 (1).png');
+      background-repeat: repeat-y;
+      background-position: bottom left;
+      text-align: center;
+      color: #2b76d3b5;
+      font-size: 16px;
+    }
+
+    #baizao {
+           /////display: flex
+      justify-content: space-between;
+      align-items: flex-start;
+      height: 360px;
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+
+    #empty-space {
+      flex-grow: 1;
+    }
+
+    .expand-button {
+		outline: none !important;
+		-webkit-tap-highlight-color: transparent;
+      font-size: 30px;
+      padding: 8px 16px;
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      position: static;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s, opacity 0.3s, box-shadow 0.3s;
+      outline: none;
+    }
+
+    .expand-button:hover {
+      animation: expandShrink 0.5s;
+      opacity: 0.8;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .expand-button:focus {
+      outline: none;
+      /* 取消点击按钮出现的蓝色边框 */
+    }
+
+    @keyframes expandShrink {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    @media screen and (max-width: 320px) and (max-height: 360px) {
+      .expand-button {
+		  outline: none !important;
+		  -webkit-tap-highlight-color: transparent;
+		  webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+		  webkit-user-select: none;
+		-moz-user-focus: none;
+		  -moz-user-select: none;
+		outline:none;
+        padding: 16px 32px;
+        font-size: 24px;
+        border-radius: 30px;
+      }
+    }
+  </style>
+  <script>
+    function xue() {
+      var audio = new Audio('https://mp-a68a848e-4cc9-48ac-94e0-2dcbfb062ad0.cdn.bspapp.com/cloudstorage/百/【白噪音 真实环境声】冬日街头的一场落雪.mp3');
+      audio.play();
+    }
+	function ling() {
+	xtc.openURL('https://okii.com/', 2);
+	}
+	function chuan() {
+	var audio = new Audio('https://mp-a68a848e-4cc9-48ac-94e0-2dcbfb062ad0.cdn.bspapp.com/cloudstorage/百/贝贝_【一小时白噪音】极致清冷，山川雾气与水波，未来感与中国风的房间-1-30232.mp3');
+	audio.play();
+	}
+  </script>
+</head>
+<body>
+  <div id="baizao" class="transition-all">
+    <button class="expand-button" onclick="xue(); this.blur();">街头落雪</button>
+	<div id="empty-space"></div>
+    <br><button class="expand-button" onclick="chuan(); this.blur();">川水凝想</button>
+  <div id="empty-space"></div>
+    <br><button class="expand-button" onclick="ling(); this.blur();">text</button>
+  </div>
+  </div>
+</body>
