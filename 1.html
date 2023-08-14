@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>nativeJsDemo</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+	<meta name="viewport" content="width=device-width,user-scalable=no" />
+	<script src="./default-js.js"></script>
+</head>
+<style type="text/css">
+		body {
+			background: white;
+		}
+
+		button {
+			display: block;
+			margin-top: 20px;
+		}
+	</style>
+<script type="application/javascript">
+		window.onload = function() {
+
+			var btn = document.getElementById("btn_1");
+			var btn1 = document.getElementById("btn_2");
+			var btn2 = document.getElementById("btn_3");
+			var btn3 = document.getElementById("btn_4");
+			var btn4 = document.getElementById("btn_5");
+			var btn5 = document.getElementById("btn_6");
+			var btn6 = document.getElementById("btn_7");
+			var btn7 = document.getElementById("btn_8");
+			var btn8 = document.getElementById("btn_9");
+			var btn9 = document.getElementById("btn_10");
+			var btn_10 = document.getElementById("btn_11");
+			var btn_11 = document.getElementById("btn_12");
+			var btn_12 = document.getElementById("btn_13");
+			var btn_13 = document.getElementById("btn_14");
+			var btn_14 = document.getElementById("btn_15");
+			var btn_16 = document.getElementById("btn_16");
+			var btn_17 = document.getElementById("btn_17");
+			var btn_18 = document.getElementById("btn_18");
+			var btn_19 = document.getElementById("btn_19");
+
+			btn.onclick = function() {
+				queryTargetUri();
+			}
+			btn1.onclick = function() {
+				isCanUseDress(3);
+			}
+			btn2.onclick = function() {
+				queryDialById();
+			}
+			btn3.onclick = function() {
+				openUrl("com.xtc.dialstore", "com.xtc.dialstore.module.MainActivity");
+			}
+			btn4.onclick = function() {
+				openUrl("com.xtc.personalitydress", "com.xtc.personalitydress.module.mine.MineActivity");
+			}
+			btn5.onclick = function() {
+				openUrl("com.xtc.personalitydress", "com.xtc.personalitydress.module.nickname.NicknameActivity");
+			}
+			btn6.onclick = function() {
+				openUrl("com.xtc.personalitydress", "com.xtc.personalitydress.module.head.HeadActivity");
+			}
+			btn7.onclick = function() {
+				queryDressById(94, 0);
+			}
+			btn8.onclick = function() {
+				queryDressById(5, 1);
+			}
+			btn9.onclick = function() {
+				queryDressById(50, 2);
+			}
+			btn_10.onclick = function() {
+				useDress(97, 0);
+			}
+			btn_11.onclick = function() {
+				clearNewDress(0);
+			}
+			btn_12.onclick = function() {
+				clearNewDress(1);
+			}
+			btn_13.onclick = function() {
+				clearNewDress(2);
+			}
+			btn_14.onclick = function() {
+				clearNewDress(3);
+			}
+			function two() {
+						window.location.href = "index.html";
+						}
+			btn_16.onclick = function() {
+				isCanUseDress(0);
+			}
+			btn_17.onclick = function() {
+				isCanUseDress(1);
+			}
+			btn_18.onclick = function() {
+				isCanUseDress(2);
+			}
+			btn_19.onclick = function() {
+				reportNetworkAbort();
+			}
+
+			dsBridge.call("StoreNativeJsApi.isHaveNewDress", function(ret) {
+				console.log(JSON.stringify(ret));
+			});
+
+		}
+
+		function queryTargetUri() {
+			var dataparm = "{\"dressLocationType\":1,\"dressLocationId\":5}"
+			dsBridge.call("StoreNativeJsApi.queryTargetUri", {
+					packageName: "com.xtc.personalitydress",
+					targetName: "com.xtc.personalitydress.module.nickname.NicknameActivity",
+					data: dataparm
+				},
+				function(ret) {
+					console.log(JSON.stringify(ret));
+					var parse = JSON.parse(ret);
+					if(!parse.result) {
+						return;
+					}
+					dsBridge.call("openUrl", {
+							uri: parse.content,
+							flag: 2,
+							packageName: "com.xtc.personalitydress"
+						},
+						function(ret1) {
+							console.log(ret1);
+							console.log(JSON.stringify(ret1));
+						}
+					);
+				}
+			);
+		}
+
+		function isCanUseDialResource() {
+			dsBridge.call("StoreNativeJsApi.isCanUseDialResource", function(ret) {
+
+				console.log(ret);
+
+			});
+		}
+
+		function queryDialById() {
+
+			dsBridge.call("StoreNativeJsApi.queryDressInfo", {
+					dressId: 303,
+					dressType: 3
+				},
+				function(ret) {
+					console.log(ret);
+					var parse = JSON.parse(ret);
+					var result = parse.result;
+					if(parse != null && result) {
+
+						var content = parse.content
+						dsBridge.call("StoreNativeJsApi.useDress", {
+							dressType: 3,
+							dialBean: content
+						}, function(ret) {
+							console.log(ret);
+							console.log(JSON.stringify(ret));
+						});
+					}
+				}
+			);
+
+		}
+
+		function openUrl(packageName, targetName) {
+
+			dsBridge.call("StoreNativeJsApi.queryTargetUri", {
+					packageName: packageName,
+					targetName: targetName
+				},
+				function(ret) {
+					console.log(JSON.stringify(ret));
+					var parse = JSON.parse(ret);
+					if(!parse.result) {
+						return;
+					}
+					dsBridge.call("xtc.openUrl", {
+							uri: parse.content,
+							flag: 1,
+							packageName: packageName
+						},
+						function(ret1) {
+							console.log(ret1);
+							console.log(JSON.stringify(ret1));
+						}
+					);
+				}
+			);
+		}
+
+		function queryDressById(dressId, dressType) {
+
+			dsBridge.call("StoreNativeJsApi.queryDressInfo", {
+					dressId: dressId,
+					dressType: dressType
+				},
+				function(ret) {
+					console.log(JSON.stringify(ret));
+					var parse = JSON.parse(ret);
+				}
+			);
+		}
+
+		function useDress(dressId, dressType) {
+			dsBridge.call("StoreNativeJsApi.queryDressInfo", {
+					dressId: dressId,
+					dressType: dressType
+				},
+				function(ret) {
+					console.log(JSON.stringify(ret));
+					var parse = JSON.parse(ret);
+					if(!parse.result) {
+						console.log("查询装扮失败");
+						return;
+					}
+					dsBridge.call("StoreNativeJsApi.useDress", {
+							dressType: dressType,
+							queryDressBean: {
+								dressId: dressId,
+								dressType: dressType
+							}
+						},
+						function(ret) {
+							console.log(JSON.stringify(ret));
+						}
+					);
+				}
+			);
+		}
+
+		function clearNewDress(menuBarId) {
+			dsBridge.call("StoreNativeJsApi.clearNewDress", {
+					menuBarId: menuBarId
+				},
+				function(ret) {
+					console.log(JSON.stringify(ret));
+				}
+			);
+		}
+			function isCanUseDress(dressType) {
+			dsBridge.call("StoreNativeJsApi.isCanUseDressResource", {
+					dressType: dressType
+				},
+				function(ret) {
+					console.log(JSON.stringify(ret));
+				}
+			);
+		}
+			function reportNetworkAbort() {
+			dsBridge.call("StoreNativeJsApi.reportNetworkAbort",
+				function(ret) {
+					console.log(JSON.stringify(ret));
+				}
+			);
+		}
+	</script>
+
+<body>
+<div align="center" style="margin-top:20px;">
+	<button id="btn_2">检查表盘资源</button>
+	<button id="btn_16">检查气泡资源</button>
+	<button id="btn_17">检查昵称资源</button>
+	<button id="btn_18">检查头像资源</button>
+	<button id="btn_1">打开表盘页面</button>
+	<button id="btn_3">使用表盘</button>
+	<button id="btn_11">使用气泡</button>
+	<button id="btn_4">打开表盘app</button>
+	<button id="btn_5">打开会话气泡页面</button>
+	<button id="btn_6">打开七彩昵称页面</button>
+	<button id="btn_7">打开头像装扮页面</button>
+	<button id="btn_8">查询气泡信息</button>
+	<button id="btn_9">查询七彩昵称信息</button>
+	<button id="btn_10">查询头像装扮信息</button>
+	<button id="btn_12">清理上新气泡缓存</button>
+	<button id="btn_13">清理上新昵称缓存</button>
+	<button id="btn_14">清理上新装扮缓存</button>
+	<button id="btn_15">清理上新表盘缓存</button>
+	<button id="btn_19">上报网络异常</button>
+	<button id="two" onclick="shareText()">退出</button>
+</div>
+
+</body>
+
+</html>

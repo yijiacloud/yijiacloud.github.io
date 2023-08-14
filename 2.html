@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+	<meta name="viewport" content="width=device-width,user-scalable=no" />
+	<script src="./default-js.js"></script>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			
+			function two() {
+			window.location.href = "index.html";
+			}
+		function shareText() {
+            dsBridge.call(
+                "shareText",
+                {
+                    key:2166,
+                    content:"从H5分享的内容",
+                    scene:{
+                        type:0
+                    }
+                },
+                function (ret) {
+                    console.log(ret);
+                    console.log(JSON.stringify(ret));
+                });
+        }
+		</script>
+		
+	</head>
+	<body align="center">
+		<button id="btn_2" onclick="shareText()">分享文字到微聊</button>
+		<button id="two" onclick="shareText()">退出</button>
+	</body>
+</html>
